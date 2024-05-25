@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const travelDist     = 3   # Tiles that player can move during Max Jump Arc.
+const travelDist     = 4   # Tiles that player can move during Max Jump Arc.
 const jumpHeight     = 4   # Tiles that Player can ascend during Max Jump Arc.
 
 # Timers
@@ -21,58 +21,24 @@ var JUMP_GRAVITY = ( 2.0 * jumpHeight * tileSize) / (peakTime * peakTime) # Play
 var FALL_GRAVITY = ( 2.0 * jumpHeight * tileSize) / (fallTime * fallTime) # Player's Fall Acceleration on second half of jump.
 var JUMP_SPEED   = (-2.0 * jumpHeight * tileSize) / (peakTime)            # Player's Jump Impulse.
 
+var floorFrictionFactor = 1.0;
+
 var canJump = false;    # Player's ability to jump currently.
 var jumpBuffer = false; # Player's queued jump. 
-
+var jumpCounter = 0     # How long player has held jump
 
 
 func _physics_process(delta):
 	# Apply correct Gravity to player.
 	velocity.y += getGravity() * delta
 	
-	# Jump Checker
-	if is_on_floor():
-		
-		# Enable player to jump.
-		canJump = true
-		
-		# Jump if player has a jump queued
-		if jumpBuffer:
-			playerJump(1)
-			jumpBuffer = false
-		
-		
-	else:
-		
-		# If player is off the ground, queue the jump.
-		if canJump:
-			get_tree().create_timer(jumpEaseTime).timeout.connect(jumpEaseTimeout)
 	
 	# Get Directional Input
 	var DIRECTION = Input.get_axis("ui_left", "ui_right")
 	
+	playerJump(delta)
 	
-	# Player Jump Controller
-	if Input.is_action_just_pressed("ui_up"):
-		
-		
-		if canJump:
-			
-			# If jump is enabled, Jump.
-			playerJump(1)
-			
-		else:
-			
-			# If jump is disabled, Queue Jump.
-			jumpBuffer = true
-			get_tree().create_timer(jumpBufferTime).timeout.connect(jumpBufferTimeout)
 	
-	# Player Short Jump Controller
-	if Input.is_action_just_released("ui_up"):
-		
-		# If player released Jump-Key before jump has peaked, cut it short.
-		if velocity.y < 0:
-			playerJump(.5)
 	
 	if DIRECTION != 0:
 		
@@ -102,11 +68,56 @@ func jumpBufferTimeout():
 	# Empty player's jump queue after player doesn't hit floor in time.
 	jumpBuffer= false
 
-func playerJump(jumpFactor):
+func playerJump(delta):
+		# Player Jump Controller
+		# Jump Checker
+	if is_on_floor():
+		
+		# Enable player to jump.
+		canJump = true
+		
+		# Jump if player has a jump queued
+		if jumpBuffer:
+			# Move Player upwards and disable their ability to jump
+			velocity.y = JUMP_SPEED
+			canJump = false;
+			jumpBuffer = false
+		
+		
+	else:
+		
+		# If player is off the ground, queue the jump.
+		if canJump:
+			get_tree().create_timer(jumpEaseTime).timeout.connect(jumpEaseTimeout)
 	
-	# Move Player upwards and disable their ability to jump
-	velocity.y = jumpFactor * JUMP_SPEED
-	canJump = false;
+	if Input.is_action_just_pressed("ui_up"):
+		
+		if canJump:
+			
+			# If jump is enabled, Jump.
+			# Move Player upwards and disable their ability to jump
+			velocity.y = JUMP_SPEED
+			canJump = false;
+			
+		else:
+			
+			# If jump is disabled, Queue Jump.
+			jumpBuffer = true
+			get_tree().create_timer(jumpBufferTime).timeout.connect(jumpBufferTimeout)
+	
+	if Input.is_action_pressed("ui_up"):
+		jumpCounter += 1;
+	
+	if Input.is_action_just_released("ui_up"):
+		
+		jumpCounter = 0;
+		
+		if (jumpCounter <= 24) and (jumpCounter >= 12):
+			velocity.y *= jumpCounter/24
+		if jumpCounter < 12:
+			velocity.y *= 0.5
+
+	
 
 func getGravity():
 	
