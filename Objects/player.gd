@@ -84,6 +84,9 @@ func _physics_process(delta):
 		# If Move-Keys are not pressed, deccelerate towards 0 velocity.
 		velocity.x = lerp(velocity.x, 0.0, FRICTION * delta * delta) 
 	
+	# Show if player is on ground for debug
+	$Label.text = "Is on Ground : " + str(is_on_floor())
+	
 	# Apply Velocity to player.
 	move_and_slide()
 
