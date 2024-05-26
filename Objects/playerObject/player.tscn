@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://nt8qf500pa5s"]
+[gd_scene load_steps=8 format=3 uid="uid://nt8qf500pa5s"]
 
 [ext_resource type="Script" path="res://Objects/playerObject/player.gd" id="1_n468u"]
 [ext_resource type="Texture2D" uid="uid://2f4i8a7oqdl7" path="res://Resources/Textures/PlaceHolders.png" id="2_uy521"]
 [ext_resource type="Script" path="res://Resources/templateObjects/stateMachine/stateMachine.gd" id="3_xcjq2"]
 [ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerMoveState.gd" id="4_dn36a"]
+[ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerDodgeState.gd" id="5_e4krt"]
+[ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerWallJumpState.gd" id="6_sqd74"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahqda"]
 size = Vector2(20, 61)
@@ -37,7 +39,9 @@ initialState = NodePath("playerMoveState")
 
 [node name="playerMoveState" type="Node2D" parent="stateMachineClass"]
 script = ExtResource("4_dn36a")
-accelerate_time = 1.0
-deccelerate_time = 0.5
 
-[node name="playerJumpState" type="Node2D" parent="stateMachineClass"]
+[node name="playerDodgeState" type="Node2D" parent="stateMachineClass"]
+script = ExtResource("5_e4krt")
+
+[node name="playerWallJumpState" type="Node2D" parent="stateMachineClass"]
+script = ExtResource("6_sqd74")
