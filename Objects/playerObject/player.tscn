@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Resources/templateObjects/stateMachine/stateMachine.gd" id="3_xcjq2"]
 [ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerMoveState.gd" id="4_dn36a"]
 [ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerDodgeState.gd" id="5_e4krt"]
-[ext_resource type="Script" path="res://Objects/playerObject/playerStates/playerWallJumpState.gd" id="6_sqd74"]
+[ext_resource type="Script" path="res://Objects/playerObject/playerWallSlideState.gd" id="6_wqlcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahqda"]
 size = Vector2(20, 61)
@@ -39,9 +39,10 @@ initialState = NodePath("playerMoveState")
 
 [node name="playerMoveState" type="Node2D" parent="stateMachineClass"]
 script = ExtResource("4_dn36a")
+move_distance = 8.0
 
 [node name="playerDodgeState" type="Node2D" parent="stateMachineClass"]
 script = ExtResource("5_e4krt")
 
-[node name="playerWallJumpState" type="Node2D" parent="stateMachineClass"]
-script = ExtResource("6_sqd74")
+[node name="playerWallSlideState" type="Node2D" parent="stateMachineClass"]
+script = ExtResource("6_wqlcr")
