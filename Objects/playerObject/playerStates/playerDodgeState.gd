@@ -13,10 +13,14 @@ func enterState():
 func updatePhysics(delta):
 	playerDodge(delta)
 
-func playerDodge(delta):
+func playerDodge(_delta):
 	player.velocity.x = 0
 	player.velocity.x = DASH_VELOCITY * player.FACING
 	get_tree().create_timer(dash_time).timeout.connect(dashTimeout)
+	player.anim.play("playerSquish")
 
 func dashTimeout():
 	Transitioned.emit(self, "playerMoveState")
+
+func exitState():
+	player.velocity.x *= 0.5

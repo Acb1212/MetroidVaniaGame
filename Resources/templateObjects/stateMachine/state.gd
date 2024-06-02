@@ -15,5 +15,5 @@ func exitState():
 func update(_delta):
 	pass;
 
-func updatePhysics(delta):
+func updatePhysics(_delta):
 	pass;

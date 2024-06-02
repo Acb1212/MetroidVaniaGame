@@ -6,11 +6,12 @@ var DIRECTION           # Player's Directional Input
 var FACING = 1          # Player's last directional Input
 
 @onready var playerSprite = $Sprite2D
-@onready var playerLabel = $Label
+@onready var playerCollider = $CollisionShape2D
+@onready var anim = $AnimationPlayer
 var currentJumps = 1
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	DIRECTION = Input.get_axis("ui_left", "ui_right")
 	if DIRECTION:
 		FACING = sign(DIRECTION)

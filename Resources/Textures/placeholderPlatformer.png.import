@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2f4i8a7oqdl7"
-path="res://.godot/imported/PlaceHolders.png-ef532069e4ea40ac0b24a78cca4c34e7.ctex"
+uid="uid://d3fku67wmse6b"
+path="res://.godot/imported/placeholderPlatformer.png-b05e7cac616e131fc068ecf5dae3fe30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Textures/PlaceHolders.png"
-dest_files=["res://.godot/imported/PlaceHolders.png-ef532069e4ea40ac0b24a78cca4c34e7.ctex"]
+source_file="res://Resources/Textures/placeholderPlatformer.png"
+dest_files=["res://.godot/imported/placeholderPlatformer.png-b05e7cac616e131fc068ecf5dae3fe30.ctex"]
 
 [params]
 
