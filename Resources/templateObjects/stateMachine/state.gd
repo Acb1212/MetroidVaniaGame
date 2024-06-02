@@ -1,8 +1,8 @@
 extends Node2D
 class_name stateClass
 
-var stateMachine;
-var player;
+var stateMachine: stateMachineClass;
+var player: CharacterBody2D;
 
 signal Transitioned
 

@@ -8,6 +8,7 @@ var FACING = 1          # Player's last directional Input
 @onready var playerSprite = $Sprite2D
 @onready var playerCollider = $CollisionShape2D
 @onready var anim = $AnimationPlayer
+@onready var playerCamera = $Camera2D
 var currentJumps = 1
 
 

@@ -12,15 +12,15 @@ extends stateClass
 # Vertical Movement Exports
 @export_group("Jump Variables")
 @export var jump_count: float         = 1.00
-@export var jump_height: float        = 4.00
-@export var wall_jump_distance: float = 8.00
-@export var wall_jump_height: float   = 1.00
+@export var jump_height: float        = 3.00
+@export var wall_jump_distance: float = 3.00
+@export var wall_jump_height: float   = 2.5
 
-@export var jumpControlTime: float    = 0.10
+@export var jumpControlTime: float    = 0.05
 @export var peakTime: float           = 0.50
 @export var fallTime: float           = 0.40
 
-@export var jumpEaseTime: float       = 1
+@export var jumpEaseTime: float       = .2
 @export var jumpBufferTime: float     = 0.10
 
 # Horizontal Movement Variables
@@ -58,8 +58,8 @@ func enterState():
 	JUMP_GRAVITY2       = ( 2 *  jump_height * player.tileSize) / (fallTime * fallTime)
 	JUMP_FRICTION       = (  MAX_VELOCITY ) / air_friction_time
 	
-	WALLJUMP_VELOCITY_X = ( 2.0 * wall_jump_distance * player.tileSize ) / move_time
-	WALLJUMP_VELOCITY_Y = ( 2.0 * wall_jump_height   * player.tileSize ) / peakTime
+	WALLJUMP_VELOCITY_X = ( 2.0 * wall_jump_distance * player.tileSize ) / (peakTime)
+	WALLJUMP_VELOCITY_Y = ( -2.0 * wall_jump_height   * player.tileSize ) / (peakTime)
 
 
 
@@ -71,17 +71,11 @@ func updatePhysics(delta):
 	
 	if Input.is_action_just_pressed("player_down"):
 		player.playerCollider.disabled = true
-		await get_tree().create_timer(.05).timeout
+		await get_tree().create_timer(.1).timeout
 		player.playerCollider.disabled = false
 	
 	if Input.is_action_just_pressed("player_dash") and player.is_on_floor():
 		Transitioned.emit(self, "playerDodgeState")
-
-
-
-
-
-
 
 
 func getGravity(delta):
@@ -89,9 +83,8 @@ func getGravity(delta):
 	player.velocity.y += grav * delta
 
 
-
 func playerMovement(delta):
-	if player.DIRECTION != 0:
+	if player.DIRECTION != 0 and  canMove:
 		player.velocity.x = lerp(player.velocity.x, player.DIRECTION * MAX_VELOCITY, MOVE_ACCELERATION * delta * delta)
 	else:
 		if player.is_on_floor():
@@ -100,44 +93,35 @@ func playerMovement(delta):
 			player.velocity.x = lerp(player.velocity.x, 0.0, JUMP_FRICTION * delta * delta)
 
 
-
 func playerJump(_delta):
 	
-	# Reset Jumps count
 	if player.is_on_floor():
-		player.currentJumps = jump_count
-	
-	
-	if player.is_on_floor() and !canJump:
+		
+		
+		
 		canJump = true
-		wallJumpBuffer = false
 		
 		if jumpBuffer:
+			player.anim.play("playerBounce")
 			player.velocity.y = JUMP_VELOCITY
 			canJump = false
 			jumpBuffer = false
 	else:
-		get_tree().create_timer(2).timeout.connect(jumpEaseTimeout)
+		get_tree().create_timer(jumpEaseTime).timeout.connect(jumpEaseTimeout)
 	
-	
-	
-	
-	
-	if player.is_on_wall_only():
+	if player.is_on_wall_only() and player.DIRECTION:
 		canWallJump = true
-		if wallJumpBuffer:
-			player.velocity.y = JUMP_VELOCITY
-			player.velocity.x = MAX_VELOCITY * player.get_wall_normal().x
-			canWallJump = false
-			wallJumpBuffer = false
-	else: 
-		canWallJump = false
+		canJump = false
+	else:
+		get_tree().create_timer(jumpEaseTime).timeout.connect(wallJumpEaseTimeout)
+	
+	
+	
+	
 	
 	
 	if Input.is_action_just_pressed("player_jump"):
-		print(canJump)
 		if canJump:
-			player.currentJumps -=1
 			player.anim.play("playerBounce")
 			player.velocity.y = JUMP_VELOCITY
 			canJump = false
@@ -147,21 +131,19 @@ func playerJump(_delta):
 		
 		if canWallJump:
 			player.anim.play("playerBounce")
-			player.velocity.y = JUMP_VELOCITY
-			player.velocity.x = MAX_VELOCITY * player.get_wall_normal().x
+			player.velocity.x = WALLJUMP_VELOCITY_X * sign(player.get_wall_normal().x)
+			player.velocity.y = WALLJUMP_VELOCITY_Y 
 			canMove = false
+			canWallJump = false
+			get_tree().create_timer(jumpControlTime).timeout.connect(jumpControlTimeout)
 		else:
-			if !player.is_on_floor():
-				wallJumpBuffer = true
-				get_tree().create_timer(jumpBufferTime).timeout.connect(wallJumpBufferTimeout)
-	
-	
-	
+			get_tree().create_timer(wallJumpBuffer).timeout.connect(wallJumpBufferTimeout)
 	
 	
 	# Variable Jump
 	if Input.is_action_pressed("player_jump"):
 		jumpCounter += 1
+	
 	
 	if Input.is_action_just_released("player_jump"):
 		jumpCounter = 0;
@@ -169,9 +151,6 @@ func playerJump(_delta):
 			player.velocity.y *= jumpCounter/24.0
 		if jumpCounter < 12:
 			player.velocity.y *= 0.5
-
-
-
 
 func jumpEaseTimeout():
 	canJump = false

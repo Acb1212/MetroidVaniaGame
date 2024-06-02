@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://hs7p22rk63jc"]
+
+[ext_resource type="Script" path="res://Objects/environment/rooms/roomClass/room.gd" id="1_2wtlu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gx8vc"]
+size = Vector2(768, 512)
+
+[node name="roomClass" type="Node2D"]
+script = ExtResource("1_2wtlu")
+
+[node name="roomBounds" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomBounds"]
+position = Vector2(384, 256)
+shape = SubResource("RectangleShape2D_gx8vc")
+
+[connection signal="body_entered" from="roomBounds" to="." method="roomEntered"]

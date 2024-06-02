@@ -14,6 +14,7 @@ func updatePhysics(delta):
 	playerDodge(delta)
 
 func playerDodge(_delta):
+	
 	player.velocity.x = 0
 	player.velocity.x = DASH_VELOCITY * player.FACING
 	get_tree().create_timer(dash_time).timeout.connect(dashTimeout)
