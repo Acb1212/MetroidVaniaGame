@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://hs7p22rk63jc"]
+[gd_scene load_steps=4 format=3 uid="uid://hs7p22rk63jc"]
 
 [ext_resource type="Script" path="res://Objects/environment/rooms/roomClass/room.gd" id="1_2wtlu"]
+[ext_resource type="TileSet" uid="uid://ds088sqkawkcx" path="res://Resources/Textures/placeholderTileset.tres" id="2_7v2y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gx8vc"]
 size = Vector2(768, 512)
@@ -13,5 +14,9 @@ script = ExtResource("1_2wtlu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="roomBounds"]
 position = Vector2(384, 256)
 shape = SubResource("RectangleShape2D_gx8vc")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_7v2y3")
+format = 2
 
 [connection signal="body_entered" from="roomBounds" to="." method="roomEntered"]

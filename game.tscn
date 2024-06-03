@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccnvd52c42idt"]
+[gd_scene load_steps=6 format=3 uid="uid://ccnvd52c42idt"]
 
-[ext_resource type="PackedScene" uid="uid://hs7p22rk63jc" path="res://Objects/environment/rooms/roomClass/room_class.tscn" id="2_5jpmn"]
+[ext_resource type="PackedScene" uid="uid://uo1dqc8ly78m" path="res://Objects/environment/rooms/floodLands/floodlands_00.tscn" id="2_3fyjf"]
 [ext_resource type="PackedScene" uid="uid://nt8qf500pa5s" path="res://Objects/playerObject/player.tscn" id="2_orf8q"]
-[ext_resource type="TileSet" uid="uid://ds088sqkawkcx" path="res://Resources/Textures/placeholderTileset.tres" id="3_fe0ra"]
+[ext_resource type="PackedScene" uid="uid://spyuae107ln6" path="res://Objects/environment/rooms/floodLands/floodlands_01.tscn" id="3_5kfis"]
+[ext_resource type="PackedScene" uid="uid://dpm0dkdhe5a3r" path="res://Objects/environment/rooms/floodLands/floodlands_02.tscn" id="4_mqbme"]
+[ext_resource type="PackedScene" uid="uid://cq1lpwhuqiei5" path="res://Objects/environment/rooms/floodLands/floodlands_03.tscn" id="5_ikr5t"]
 
 [node name="Game" type="Node2D"]
 
@@ -31,13 +33,13 @@ Jump: Space
 Dash: Shift
 Drop: S"
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("3_fe0ra")
-format = 2
-layer_0/tile_data = PackedInt32Array(983040, 1, 0, 983041, 1, 0, 983042, 1, 0, 983043, 1, 0, 983044, 1, 0, 983045, 1, 0, 983046, 1, 0, 983047, 1, 0, 983048, 1, 0, 983049, 1, 0, 983050, 1, 0, 983051, 1, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 1, 0, 983058, 1, 0, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 1, 0, 983063, 1, 0, 1048552, 1, 0, 983016, 1, 0, 917480, 1, 0, 851944, 1, 0, 786408, 1, 0, 720872, 1, 0, 655336, 1, 0, 589800, 1, 0, 524264, 1, 0, 917527, 1, 0, 851991, 1, 0, 786455, 1, 0, 720919, 1, 0, 655383, 1, 0, 589847, 1, 0, 524311, 1, 0, 458775, 1, 0, 393239, 1, 0, 1048575, 1, 0, 1114111, 1, 0, 1179647, 1, 0, 1245183, 1, 0, 1310719, 1, 0, 1376255, 1, 0, 1441791, 1, 0, 1507327, 1, 0, 1572863, 1, 0, 1638399, 1, 0, 1703935, 1, 0, 1769471, 1, 0, 1835007, 1, 0, 1900543, 1, 0, 1966079, 1, 0, 2031615, 1, 0, 2097151, 1, 0, 2162687, 1, 0, 2228223, 1, 0, 2293759, 1, 0, 2359295, 1, 0, 2424831, 1, 0, 2490367, 1, 0, 2555903, 1, 0, 2621439, 1, 0, 2686975, 1, 0, 2752511, 1, 0, 2818047, 1, 0, 2883583, 1, 0, 2949119, 1, 0, 3014655, 1, 0, 3080191, 1, 0, 3145727, 1, 0, 3145726, 1, 0, 3145725, 1, 0, 3145724, 1, 0, 3145723, 1, 0, 3145722, 1, 0, 3145721, 1, 0, 3145720, 1, 0, 3145719, 1, 0, 3145718, 1, 0, 3145717, 1, 0, 3145716, 1, 0, 3145715, 1, 0, 3145714, 1, 0, 3145713, 1, 0, 3145712, 1, 0, 3145711, 1, 0, 3145710, 1, 0, 3145709, 1, 0, 3145708, 1, 0, 3145707, 1, 0, 3145706, 1, 0, 3145705, 1, 0, 3145704, 1, 0, 1114088, 1, 0, 1179624, 1, 0, 1245160, 1, 0, 1310696, 1, 0, 1376232, 1, 0, 1441768, 1, 0, 1507304, 1, 0, 1572840, 1, 0, 1638376, 1, 0, 1703912, 1, 0, 1769448, 1, 0, 1834984, 1, 0, 1900520, 1, 0, 1966056, 1, 0, 2031592, 1, 0, 2097128, 1, 0, 2162664, 1, 0, 2228200, 1, 0, 2293736, 1, 0, 2359272, 1, 0, 2424808, 1, 0, 2490344, 1, 0, 2555880, 1, 0, 2621416, 1, 0, 2686952, 1, 0, 2752488, 1, 0, 2818024, 1, 0, 2883560, 1, 0, 2949096, 1, 0, 3014632, 1, 0, 3080168, 1, 0, 2949118, 65537, 0, 2752510, 65537, 0, 2555902, 65537, 0, 2359294, 65537, 0, 2162686, 65537, 0, 1966078, 65537, 0, 1769470, 65537, 0, 1572862, 65537, 0, 1376254, 65537, 0, 1179646, 65537, 0, 1048574, 65537, 0, 458728, 1, 0, 393192, 1, 0, 327656, 1, 0, 262120, 1, 0, 196584, 1, 0, 131048, 1, 0, 65512, 1, 0, 65513, 1, 0, 65514, 1, 0, 65515, 1, 0, 65516, 1, 0, 65517, 1, 0, 65518, 1, 0, 65519, 1, 0, 65520, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 65532, 1, 0, 65531, 1, 0, 65530, 1, 0, 65529, 1, 0, 65528, 1, 0, 65527, 1, 0, 65526, 1, 0, 65525, 1, 0, 65524, 1, 0, 65523, 1, 0, 65522, 1, 0, 65521, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 65559, 1, 0, 131095, 1, 0, 196631, 1, 0, 262167, 1, 0, 327703, 1, 0, 11, 1, 0, 12, 1, 0, 10, 1, 0, 9, 1, 0, 8, 1, 0)
+[node name="roomClass" parent="." instance=ExtResource("2_3fyjf")]
 
-[node name="roomClass" parent="." instance=ExtResource("2_5jpmn")]
-
-[node name="roomClass2" parent="." instance=ExtResource("2_5jpmn")]
+[node name="roomClass2" parent="." instance=ExtResource("3_5kfis")]
 position = Vector2(-768, 0)
-roomHeight = 3
+
+[node name="roomClass3" parent="." instance=ExtResource("4_mqbme")]
+position = Vector2(0, 1024)
+
+[node name="roomClass4" parent="." instance=ExtResource("5_ikr5t")]
+position = Vector2(768, 1536)

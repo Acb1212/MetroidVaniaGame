@@ -75,7 +75,7 @@ func updatePhysics(delta):
 		player.playerCollider.disabled = false
 	
 	if Input.is_action_just_pressed("player_dash") and player.is_on_floor():
-		Transitioned.emit(self, "playerDodgeState")
+		Transitioned.emit(self, player.characterAbilities[0])
 
 
 func getGravity(delta):

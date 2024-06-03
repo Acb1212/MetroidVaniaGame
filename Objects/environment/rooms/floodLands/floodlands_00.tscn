@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://uo1dqc8ly78m"]
+
+[ext_resource type="Script" path="res://Objects/environment/rooms/roomClass/room.gd" id="1_or2rx"]
+[ext_resource type="TileSet" uid="uid://ds088sqkawkcx" path="res://Resources/Textures/placeholderTileset.tres" id="2_li3i3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gx8vc"]
+size = Vector2(768, 512)
+
+[node name="roomClass" type="Node2D"]
+script = ExtResource("1_or2rx")
+
+[node name="roomBounds" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomBounds"]
+position = Vector2(384, 256)
+shape = SubResource("RectangleShape2D_gx8vc")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_li3i3")
+format = 2
+layer_0/tile_data = PackedInt32Array(983040, 1, 0, 983041, 1, 0, 983042, 1, 0, 983043, 1, 0, 983044, 1, 0, 983045, 1, 0, 983046, 1, 0, 983047, 1, 0, 983048, 1, 0, 983049, 1, 0, 983050, 1, 0, 983051, 1, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 1, 0, 983058, 1, 0, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 1, 0, 983063, 1, 0, 786432, 1, 0, 720896, 1, 0, 655360, 1, 0, 589824, 1, 0, 524288, 1, 0, 458752, 1, 0, 393216, 1, 0, 327680, 1, 0, 262144, 1, 0, 196608, 1, 0, 131072, 1, 0, 65536, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 65559, 1, 0, 131095, 1, 0, 196631, 1, 0, 720919, 1, 0, 786455, 1, 0, 327703, 1, 0, 262167, 1, 0, 589847, 1, 0, 655383, 1, 0, 65537, 1, 0, 65558, 1, 0, 917513, 1, 0, 917514, 1, 0, 917515, 1, 0, 917516, 1, 0, 917517, 1, 0, 917519, 1, 0, 917518, 1, 0, 917512, 1, 0, 917527, 1, 0, 851991, 1, 0, 720907, 1, 0, 524299, 1, 0, 917526, 1, 0, 851990, 1, 0, 786454, 1, 0, 720918, 1, 0, 655382, 1, 0, 589846, 1, 0, 327702, 1, 0, 262166, 1, 0, 196630, 1, 0, 131094, 1, 0, 65557, 1, 0, 589835, 1, 0, 655371, 1, 0, 786443, 1, 0, 851979, 1, 0, 917511, 1, 0, 524298, 65537, 0, 524300, 65537, 0, 655369, 65537, 0, 655370, 65537, 0, 655372, 65537, 0, 655373, 65537, 0, 786440, 65537, 0, 786441, 65537, 0, 786442, 65537, 0, 786444, 65537, 0, 786445, 65537, 0, 786446, 65537, 0)
+
+[connection signal="body_entered" from="roomBounds" to="." method="roomEntered"]

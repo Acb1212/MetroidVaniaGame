@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccd2os2yenb5l"]
+
+[ext_resource type="Script" path="res://Objects/environment/effects/afterImage.gd" id="1_smpcm"]
+
+[node name="afterImage" type="Sprite2D"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+script = ExtResource("1_smpcm")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="fadeSprite"]
